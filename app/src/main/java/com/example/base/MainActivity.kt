@@ -1,10 +1,13 @@
 package com.example.base
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -36,6 +39,19 @@ class MainActivity : AppCompatActivity() {
             }.addOnSuccessListener {
                 Toast.makeText(this, "ERROR Occured", Toast.LENGTH_SHORT).show()
             }
+
         }
+        signButton.setOnClickListener {
+            val intent=Intent(this,bottom_nav::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
+    private fun replaceFragment(fragment: Fragment)
+    {
+        val fragmentManager=supportFragmentManager
+        val fragmentTransaction=fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.nav_host_fragment_activity_bottom_nav,fragment)
+        fragmentTransaction.commit()
     }
 }
